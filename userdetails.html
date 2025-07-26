@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Enter your delivery details to complete your order from Kalindi - Anjali Gruh Udyog.">
+    <title id="pageTitle">Kalindi - Anjali Gruh Udyog: Your Details</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'heritage': {
+                            '50': '#faf6f0',
+                            '100': '#f4ecdd',
+                            '200': '#e8d7b9',
+                            '300': '#dabb8b',
+                            '400': '#cb9759',
+                            '500': '#b17e4f',
+                            '600': '#9d6b42',
+                            '700': '#7f5437',
+                            '800': '#684530',
+                            '900': '#573b2a',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'display': ['"Playfair Display"', 'serif']
+                    },
+                    screens: {
+                        'xs': '375px',
+                        '3xl': '1920px'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf6f0;
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .header-font {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 sm:p-6 md:p-8">
+
+    <div class="w-full max-w-2xl bg-white rounded-xl shadow-md p-4 sm:p-6 md:p-8 lg:p-10 border border-heritage-200">
+
+        <header class="text-center mb-8 sm:mb-10">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-heritage-800 mb-3 header-font" id="userDetailsTitle">
+                Your Details
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-700" id="userDetailsSubtitle">
+                Please fill in your details to finalize your order.
+            </p>
+        </header>
+
+        <section class="mb-8">
+            <h2 class="text-xl md:text-2xl font-bold text-heritage-700 mb-4 header-font" id="orderSummaryTitle">
+                Order Summary
+            </h2>
+            <div id="orderSummary" class="bg-heritage-50 p-4 rounded-md border border-heritage-100 mb-4">
+                <div id="orderItems" class="text-sm text-gray-700 mt-2 space-y-1">
+                    </div>
+                <hr class="my-4 border-heritage-200">
+                <p id="subtotalAmountText" class="text-md font-semibold text-heritage-800">Subtotal: ₹<span id="orderSubtotal">0</span></p>
+                <p id="deliveryChargeText" class="text-md font-semibold text-heritage-800">Delivery Charge: ₹<span id="deliveryCharge">0</span></p>
+                <p id="totalAmountText" class="text-lg font-bold text-heritage-800 mt-2">Grand Total: ₹<span id="orderGrandTotal">0</span></p>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <form id="customerDetailsForm" class="space-y-6">
+                <div>
+                    <label for="customerName" class="block text-sm font-medium text-gray-700" id="nameLabel">Full Name:</label>
+                    <input type="text" id="customerName" name="customerName" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-heritage-500 focus:border-heritage-500 sm:text-sm p-2">
+                </div>
+                <div>
+                    <label for="customerPhone" class="block text-sm font-medium text-gray-700" id="phoneLabel">Phone Number:</label>
+                    <input type="tel" id="customerPhone" name="customerPhone" required pattern="[0-9]{10}" placeholder="e.g., 9876543210" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-heritage-500 focus:border-heritage-500 sm:text-sm p-2">
+                </div>
+                <div>
+                    <label for="customerAddress" class="block text-sm font-medium text-gray-700" id="addressLabel">Delivery Address:</label>
+                    <textarea id="customerAddress" name="customerAddress" rows="3" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-heritage-500 focus:border-heritage-500 sm:text-sm p-2"></textarea>
+                </div>
+                <div>
+                    <label for="customerLandmark" class="block text-sm font-medium text-gray-700" id="landmarkLabel">Landmark (Optional):</label>
+                    <input type="text" id="customerLandmark" name="customerLandmark" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-heritage-500 focus:border-heritage-500 sm:text-sm p-2">
+                </div>
+                <div>
+                    <label for="customerCity" class="block text-sm font-medium text-gray-700" id="cityLabel">City:</label>
+                    <input type="text" id="customerCity" name="customerCity" value="Chhatrapati Sambhaji Nagar" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-heritage-500 focus:border-heritage-500 sm:text-sm p-2">
+                </div>
+                <div>
+                    <label for="customerPincode" class="block text-sm font-medium text-gray-700" id="pincodeLabel">Pincode:</label>
+                    <input type="text" id="customerPincode" name="customerPincode" required pattern="[0-9]{6}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-heritage-500 focus:border-heritage-500 sm:text-sm p-2">
+                </div>
+                
+                <div class="pt-4 border-t border-heritage-200">
+                    <p class="block text-sm font-medium text-gray-700 mb-2" id="deliveryDistanceLabel">Delivery Distance from our location (14, Jai Vishwabharti Colony, Chhatrapati Sambhaji Nagar):</p>
+                    <div class="flex items-center space-x-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="deliveryDistance" value="short" class="form-radio text-heritage-600 h-4 w-4" checked onchange="handleDistanceChange()">
+                            <span class="ml-2 text-gray-700" id="distanceShort">Within 2 KM</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="deliveryDistance" value="long" class="form-radio text-heritage-600 h-4 w-4" onchange="handleDistanceChange()">
+                            <span class="ml-2 text-gray-700" id="distanceLong">More than 2 KM</span>
+                        </label>
+                    </div>
+
+                    <div id="longDistanceOptions" class="mt-4 p-3 bg-heritage-100 rounded-md border border-heritage-200" style="display: none;">
+                        <p class="block text-sm font-medium text-gray-700 mb-2" id="longDistanceOptionsLabel">Select Delivery Option for > 2 KM:</p>
+                        <label class="inline-flex items-center mb-2">
+                            <input type="radio" name="longDistanceDeliveryOption" value="flat100" class="form-radio text-heritage-600 h-4 w-4" checked onchange="updateDeliveryCharge()">
+                            <span class="ml-2 text-gray-700" id="optionFlat100">Pay ₹100 delivery charge</span>
+                        </label><br>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="longDistanceDeliveryOption" value="min1kg" class="form-radio text-heritage-600 h-4 w-4" onchange="updateDeliveryCharge()">
+                            <span class="ml-2 text-gray-700" id="optionMin1kg">Order 1 KG or more (Delivery charge ₹20)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-heritage-600 text-white rounded-lg font-semibold text-lg hover:bg-heritage-700 transition duration-200" id="placeOrderButton">
+                    Place Order via WhatsApp
+                </button>
+            </form>
+        </section>
+
+        <footer class="mt-10 sm:mt-12 text-center text-gray-600 text-sm">
+            <p class="mb-2">
+                © <span id="currentYear"></span> Kalindi - Anjali Gruh Udyog. All rights reserved.
+            </p>
+            <p class="text-gray-500">
+                Made with <i class="fas fa-heart text-red-400"></i> in Chhatrapati Sambhaji Nagar
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        const API_BASE_URL = ''; // Changed to empty string for relative API path for GitHub deployment
+
+        const translations = {
+            en: {
+                pageTitle: "Kalindi - Anjali Gruh Udyog: Your Details",
+                userDetailsTitle: "Your Details",
+                userDetailsSubtitle: "Please fill in your details to finalize your order.",
+                orderSummaryTitle: "Order Summary",
+                subtotalAmountText: "Subtotal:",
+                deliveryChargeText: "Delivery Charge:",
+                totalAmountText: "Grand Total:",
+                nameLabel: "Full Name:",
+                phoneLabel: "Phone Number:",
+                addressLabel: "Delivery Address:",
+                landmarkLabel: "Landmark (Optional):",
+                cityLabel: "City:",
+                pincodeLabel: "Pincode:",
+                deliveryDistanceLabel: "Delivery Distance from our location (14, Jai Vishwabharti Colony, Chhatrapati Sambhaji Nagar):",
+                distanceShort: "Within 2 KM",
+                distanceLong: "More than 2 KM",
+                longDistanceOptionsLabel: "Select Delivery Option for > 2 KM:",
+                optionFlat100: "Pay ₹100 delivery charge",
+                optionMin1kg: "Order 1 KG or more (Delivery charge ₹20)",
+                placeOrderButton: "Place Order via WhatsApp",
+                orderConfirmation: "Thank you for your order! We'll contact you soon.",
+                orderError: "There was an issue processing your order. Please try again.",
+                languageNotSet: "Language preference not found. Please visit the homepage first.",
+                item: "Item",
+                quantity: "Qty",
+                price: "Price",
+                total: "Total",
+                rupeeSymbol: "₹",
+                gram: "gm",
+                kilogram: "Kg",
+                minOrderWarning: "For deliveries more than 2 KM with the 'Order 1 KG or more' option, a minimum order of {minOrderKg} KG is required. Your current order is {currentWeight} KG. Please add more items.",
+                cartEmpty: "Your cart is empty.",
+            },
+            hi: {
+                pageTitle: "कालिंदी - अंजली गृह उद्योग: आपका विवरण",
+                userDetailsTitle: "आपका विवरण",
+                userDetailsSubtitle: "अपना ऑर्डर अंतिम रूप देने के लिए कृपया अपना विवरण भरें।",
+                orderSummaryTitle: "ऑर्डर सारांश",
+                subtotalAmountText: "उपयोग:",
+                deliveryChargeText: "वितरण शुल्क:",
+                totalAmountText: "कुल राशि:",
+                nameLabel: "पूरा नाम:",
+                phoneLabel: "फ़ोन नंबर:",
+                addressLabel: "वितरण पता:",
+                landmarkLabel: "लैंडमार्क (वैकल्पिक):",
+                cityLabel: "शहर:",
+                pincodeLabel: "पिन कोड:",
+                deliveryDistanceLabel: "हमारे स्थान से वितरण दूरी (14, जय विश्वभारती कॉलोनी, छत्रपति संभाजी नगर):",
+                distanceShort: "2 किमी के भीतर",
+                distanceLong: "2 किमी से अधिक",
+                longDistanceOptionsLabel: "2 किमी से अधिक के लिए वितरण विकल्प चुनें:",
+                optionFlat100: "₹100 वितरण शुल्क का भुगतान करें",
+                optionMin1kg: "1 किलो या अधिक का ऑर्डर दें (वितरण शुल्क ₹20)",
+                placeOrderButton: "व्हाट्सएप के माध्यम से ऑर्डर दें",
+                orderConfirmation: "आपके ऑर्डर के लिए धन्यवाद! हम जल्द ही आपसे संपर्क करेंगे।",
+                orderError: "आपके ऑर्डर को संसाधित करने में कोई समस्या थी। कृपया पुनः प्रयास करें।",
+                languageNotSet: "भाषा वरीयता नहीं मिली। कृपया पहले होमपेज पर जाएँ।",
+                item: "उत्पाद",
+                quantity: "मात्रा",
+                price: "मूल्य",
+                total: "कुल",
+                rupeeSymbol: "₹",
+                gram: "ग्राम",
+                kilogram: "किलो",
+                minOrderWarning: "2 किमी से अधिक की डिलीवरी के लिए '1 किलो या अधिक का ऑर्डर दें' विकल्प के साथ, न्यूनतम {minOrderKg} किलो का ऑर्डर आवश्यक है। आपका वर्तमान ऑर्डर {currentWeight} किलो है। कृपया और आइटम जोड़ें।",
+                cartEmpty: "आपका कार्ट खाली है।"
+            },
+            mr: {
+                pageTitle: "कालंदी - अंजली गृह उद्योग: तुमचे तपशील",
+                userDetailsTitle: "तुमचे तपशील",
+                userDetailsSubtitle: "तुमची ऑर्डर अंतिम करण्यासाठी कृपया तुमचे तपशील भरा.",
+                orderSummaryTitle: "ऑर्डर सारांश",
+                subtotalAmountText: "उपयोग:",
+                deliveryChargeText: "वितरण शुल्क:",
+                totalAmountText: "एकूण रक्कम:",
+                nameLabel: "पूर्ण नाव:",
+                phoneLabel: "फोन नंबर:",
+                addressLabel: "वितरण पत्ता:",
+                landmarkLabel: "लँडमार्क (ऐच्छिक):",
+                cityLabel: "शहर:",
+                pincodeLabel: "पिन कोड:",
+                deliveryDistanceLabel: "आमच्या ठिकाणापासून वितरण अंतर (14, जय विश्वभारती कॉलनी, छत्रपती संभाजी नगर):",
+                distanceShort: "2 किमीच्या आत",
+                distanceLong: "2 किमी पेक्षा जास्त",
+                longDistanceOptionsLabel: "2 किमी पेक्षा जास्तसाठी वितरण पर्याय निवडा:",
+                optionFlat100: "₹100 वितरण शुल्क भरा",
+                optionMin1kg: "1 किलो किंवा त्याहून अधिक ऑर्डर द्या (वितरण शुल्क ₹20)",
+                placeOrderButton: "व्हॉट्सॲपद्वारे ऑर्डर द्या",
+                orderConfirmation: "तुमच्या ऑर्डरबद्दल धन्यवाद! आम्ही लवकरच तुमच्याशी संपर्क साधू.",
+                orderError: "तुमच्या ऑर्डरवर प्रक्रिया करताना समस्या आली. कृपया पुन्हा प्रयत्न करा.",
+                languageNotSet: "भाषा प्राधान्य सापडले नाही. कृपया आधी मुख्यपृष्ठाला भेट द्या.",
+                item: "उत्पादन",
+                quantity: "प्रमाण",
+                price: "किंमत",
+                total: "एकूण",
+                rupeeSymbol: "₹",
+                gram: "ग्रॅम",
+                kilogram: "किलो",
+                minOrderWarning: "2 किमी पेक्षा जास्त वितरणासाठी '1 किलो किंवा त्याहून अधिक ऑर्डर द्या' पर्यायासह, किमान {minOrderKg} किलोची ऑर्डर आवश्यक आहे. तुमची सध्याची ऑर्डर {currentWeight} किलो आहे. कृपया आणखी वस्तू जोडा.",
+                cartEmpty: "तुमची कार्ट रिकामी आहे."
+            }
+        };
+
+        const productsData = [
+            { id: '1', name: "Peanut Chutney (Garlic)", marathi: "शेंगदाणा चटणी (लसूण)", hindi: "मूंगफली की चटनी (लहसुन)" },
+            { id: '2', name: "Peanut Chutney (Fasting)", marathi: "शेंगदाणा चटणी (उपवास)", hindi: "मूंगफली की चटनी (उपवास)" },
+            { id: '3', name: "Flaxseed Chutney (Garlic)", marathi: "जवस चटणी (लसूण)", hindi: "अलसी की चटनी (लहसुन)" },
+            { id: '4', name: "Niger Seed Chutney (Garlic)", marathi: "कारळा चटणी (लसूण)", hindi: "करला चटनी (लहसुन)" },
+            { id: '5', name: "Coconut Chutney (Garlic)", marathi: "खोबरं चटणी (लसूण)", hindi: "नारियल की चटनी (लहसुन)" },
+            { id: '6', name: "Pud Chutney", marathi: "पुड चटणी", hindi: "पुड चटनी" },
+            { id: '7', name: "Sesame Chutney", marathi: "तीळ चटणी", hindi: "तिल की चटनी" },
+            { id: '8', name: "Digestive Areca Nut", marathi: "पाचक सुपारी", hindi: "पाचक सुपारी" },
+            { id: '9', name: "Metkut (Spice Powder Mix)", marathi: "मेथकुट", hindi: "मेथकुट" },
+            { id: '10', name: "Dink Laddu (Nutmeg & Cardamom)", marathi: "डिंक लाडू (जायफळ वेलदोची)", hindi: "गोंद के लड्डू (जायफल और इलायची)" },
+            { id: '11', name: "Peanut Laddu (Cardamom)", marathi: "शेंगदाणा लाडू (वेलदोची)", hindi: "मूंगफली के लड्डू (इलायची)" },
+            { id: '12', name: "Besan Laddu (Cardamom)", marathi: "बेसन लाडू (वेलदोची)", hindi: "बेसन के लड्डू (इलायची)" },
+            { id: '13', name: "Thalipeeth Bhajani (Mixed Grains Flour)", marathi: "थालीपीठ भाजणी (मिक्स धान्य)", hindi: "थालीपीठ भाजनी (मिश्रित अनाज का आटा)" },
+            { id: '14', name: "Chakali Bhajani", marathi: "चकली भाजणी", hindi: "चकली भाजani" }
+        ];
+
+        let DELIVERY_CHARGES = {
+            'short': 20,
+            'long_flat100': 100,
+            'long_min1kg': 20 
+        };
+        let MIN_ORDER_KG_FOR_LONG_DISTANCE = 1;
+
+        let currentLang = 'en';
+        let orderSubtotal = 0;
+        let currentDeliveryCharge = 0;
+        let selectedLongDistanceOption = 'flat100'; 
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const savedLang = localStorage.getItem('kalindiLang');
+            if (savedLang) {
+                currentLang = savedLang;
+            } else {
+                alert(translations.en.languageNotSet);
+                window.location.href = 'index.html'; 
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/delivery_settings`);
+                if (response.ok) {
+                    const settings = await response.json();
+                    DELIVERY_CHARGES = settings.DELIVERY_CHARGES || DELIVERY_CHARGES;
+                    MIN_ORDER_KG_FOR_LONG_DISTANCE = settings.MIN_ORDER_KG_FOR_LONG_DISTANCE || MIN_ORDER_KG_FOR_LONG_DISTANCE;
+                } else {
+                    console.error('Failed to fetch delivery settings from backend, using defaults.');
+                }
+            } catch (error) {
+                console.error('Error fetching delivery settings:', error);
+                console.error('Using default delivery settings. Make sure the backend is running and accessible (e.g., via Ngrok).');
+            }
+
+            applyTranslations(currentLang);
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            loadOrderSummary();
+            handleDistanceChange(); 
+            
+            const longDistanceOptionsDiv = document.getElementById('longDistanceOptions');
+            if (longDistanceOptionsDiv.style.display !== 'none') {
+                document.querySelector('input[name="longDistanceDeliveryOption"][value="flat100"]').checked = true;
+            }
+
+
+            document.getElementById('customerDetailsForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                sendOrderViaWhatsApp();
+            });
+        });
+
+        function applyTranslations(lang) {
+            const t = translations[lang];
+            document.getElementById('pageTitle').textContent = t.pageTitle;
+            document.getElementById('userDetailsTitle').textContent = t.userDetailsTitle;
+            document.getElementById('userDetailsSubtitle').textContent = t.userDetailsSubtitle;
+            document.getElementById('orderSummaryTitle').textContent = t.orderSummaryTitle;
+            document.getElementById('subtotalAmountText').innerHTML = `${t.subtotalAmountText} ${t.rupeeSymbol}<span id="orderSubtotal">0</span>`;
+            document.getElementById('deliveryChargeText').innerHTML = `${t.deliveryChargeText} ${t.rupeeSymbol}<span id="deliveryCharge">0</span>`;
+            document.getElementById('totalAmountText').innerHTML = `${t.totalAmountText} ${t.rupeeSymbol}<span id="orderGrandTotal">0</span>`;
+            document.getElementById('nameLabel').textContent = t.nameLabel;
+            document.getElementById('phoneLabel').textContent = t.phoneLabel;
+            document.getElementById('addressLabel').textContent = t.addressLabel;
+            document.getElementById('landmarkLabel').textContent = t.landmarkLabel;
+            document.getElementById('cityLabel').textContent = t.cityLabel;
+            document.getElementById('pincodeLabel').textContent = t.pincodeLabel;
+            document.getElementById('deliveryDistanceLabel').textContent = t.deliveryDistanceLabel;
+            document.getElementById('distanceShort').textContent = t.distanceShort;
+            document.getElementById('distanceLong').textContent = t.distanceLong;
+            document.getElementById('longDistanceOptionsLabel').textContent = t.longDistanceOptionsLabel;
+            document.getElementById('optionFlat100').textContent = t.optionFlat100;
+            document.getElementById('optionMin1kg').textContent = t.optionMin1kg;
+            document.getElementById('placeOrderButton').textContent = t.placeOrderButton;
+            loadOrderSummary(); 
+            updateDeliveryCharge(); 
+        }
+
+        function getProductNameForDisplay(product) {
+            if (currentLang === 'hi') {
+                return product.hindi;
+            } else if (currentLang === 'mr') {
+                return product.marathi;
+            } else {
+                return product.name;
+            }
+        }
+
+        function loadOrderSummary() {
+            const cart = JSON.parse(sessionStorage.getItem('currentOrderCart'));
+            orderSubtotal = parseFloat(sessionStorage.getItem('currentOrderTotal') || '0');
+            
+            const orderItemsContainer = document.getElementById('orderItems');
+            const orderSubtotalSpan = document.getElementById('orderSubtotal');
+            
+            orderItemsContainer.innerHTML = '';
+
+            if (!cart || cart.length === 0) {
+                orderItemsContainer.innerHTML = `<p class="text-center text-gray-500">${translations[currentLang].cartEmpty}</p>`;
+                orderSubtotalSpan.textContent = '0';
+                return;
+            }
+
+            cart.forEach(item => {
+                const product = productsData.find(p => p.id === item.id);
+                const displayProductName = product ? getProductNameForDisplay(product) : item.name;
+                const unit = item.size.endsWith('gm') ? translations[currentLang].gram : translations[currentLang].kilogram;
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'flex justify-between items-center py-1';
+                itemDiv.innerHTML = `
+                    <span class="flex-grow">${displayProductName} (${item.size.replace('gm', unit).replace('Kg', translations[currentLang].kilogram)})</span>
+                    <span class="w-1/4 text-center">${translations[currentLang].quantity}: ${item.quantity}</span>
+                    <span class="w-1/4 text-right">${translations[currentLang].rupeeSymbol}${item.price * item.quantity}</span>
+                `;
+                orderItemsContainer.appendChild(itemDiv);
+            });
+
+            orderSubtotalSpan.textContent = orderSubtotal.toFixed(0);
+            updateGrandTotal();
+        }
+
+        function handleDistanceChange() {
+            const selectedDistance = document.querySelector('input[name="deliveryDistance"]:checked').value;
+            const longDistanceOptionsDiv = document.getElementById('longDistanceOptions');
+
+            if (selectedDistance === 'long') {
+                longDistanceOptionsDiv.style.display = 'block';
+                document.querySelector('input[name="longDistanceDeliveryOption"][value="flat100"]').checked = true;
+                selectedLongDistanceOption = 'flat100'; 
+            } else {
+                longDistanceOptionsDiv.style.display = 'none';
+                selectedLongDistanceOption = null; 
+            }
+            updateDeliveryCharge();
+        }
+
+        function updateDeliveryCharge() {
+            const selectedDistance = document.querySelector('input[name="deliveryDistance"]:checked').value;
+            
+            if (selectedDistance === 'short') {
+                currentDeliveryCharge = DELIVERY_CHARGES.short;
+            } else {
+                selectedLongDistanceOption = document.querySelector('input[name="longDistanceDeliveryOption"]:checked').value;
+
+                if (selectedLongDistanceOption === 'flat100') {
+                    currentDeliveryCharge = DELIVERY_CHARGES.long_flat100;
+                } else if (selectedLongDistanceOption === 'min1kg') {
+                    currentDeliveryCharge = DELIVERY_CHARGES.long_min1kg;
+                }
+            }
+            document.getElementById('deliveryCharge').textContent = currentDeliveryCharge.toFixed(0);
+            updateGrandTotal();
+        }
+
+        function updateGrandTotal() {
+            const grandTotal = orderSubtotal + currentDeliveryCharge;
+            document.getElementById('orderGrandTotal').textContent = grandTotal.toFixed(0);
+        }
+
+        function getTotalWeightInKg() {
+            const cart = JSON.parse(sessionStorage.getItem('currentOrderCart'));
+            let totalWeightKg = 0;
+
+            if (!cart) return 0;
+
+            cart.forEach(item => {
+                const sizeValue = parseFloat(item.size.replace(/[^0-9.]/g, ''));
+                const sizeUnit = item.size.replace(/[0-9.]/g, '');
+
+                if (sizeUnit.toLowerCase().includes('gm')) {
+                    totalWeightKg += (sizeValue * item.quantity) / 1000;
+                } else if (sizeUnit.toLowerCase().includes('kg')) {
+                    totalWeightKg += (sizeValue * item.quantity);
+                }
+            });
+            return totalWeightKg;
+        }
+
+        function sendOrderViaWhatsApp() {
+            const customerName = document.getElementById('customerName').value;
+            const customerPhone = document.getElementById('customerPhone').value;
+            const customerAddress = document.getElementById('customerAddress').value;
+            const customerLandmark = document.getElementById('customerLandmark').value;
+            const customerCity = document.getElementById('customerCity').value;
+            const customerPincode = document.getElementById('customerPincode').value;
+            const selectedDistance = document.querySelector('input[name="deliveryDistance"]:checked').value;
+
+            const cart = JSON.parse(sessionStorage.getItem('currentOrderCart'));
+            const orderGrandTotal = document.getElementById('orderGrandTotal').textContent;
+
+            if (!cart || cart.length === 0) {
+                alert(translations[currentLang].cartEmpty);
+                return;
+            }
+
+            if (selectedDistance === 'long' && selectedLongDistanceOption === 'min1kg') {
+                const totalWeight = getTotalWeightInKg();
+                if (totalWeight < MIN_ORDER_KG_FOR_LONG_DISTANCE) {
+                    alert(translations[currentLang].minOrderWarning.replace('{currentWeight}', totalWeight.toFixed(2)).replace('{minOrderKg}', MIN_ORDER_KG_FOR_LONG_DISTANCE));
+                    return;
+                }
+            }
+
+            let whatsappMessage = `*${translations[currentLang].orderConfirmation.split('!')[0].trim()}*\n\n`;
+            
+            whatsappMessage += `*${translations[currentLang].userDetailsTitle}:*\n`;
+            whatsappMessage += `${translations[currentLang].nameLabel} ${customerName}\n`;
+            whatsappMessage += `${translations[currentLang].phoneLabel} ${customerPhone}\n`;
+            whatsappMessage += `${translations[currentLang].addressLabel} ${customerAddress}\n`;
+            if (customerLandmark) {
+                whatsappMessage += `${translations[currentLang].landmarkLabel} ${customerLandmark}\n`;
+            }
+            whatsappMessage += `${translations[currentLang].cityLabel} ${customerCity}\n`;
+            whatsappMessage += `${translations[currentLang].pincodeLabel} ${customerPincode}\n`;
+            
+            const deliveryDistanceText = document.querySelector('input[name="deliveryDistance"]:checked').nextElementSibling.textContent;
+            whatsappMessage += `${translations[currentLang].deliveryDistanceLabel.split('(')[0].trim()}: ${deliveryDistanceText}\n`;
+            if (selectedDistance === 'long') {
+                const longDistanceOptionText = document.querySelector(`input[name="longDistanceDeliveryOption"][value="${selectedLongDistanceOption}"]`).nextElementSibling.textContent;
+                whatsappMessage += `${translations[currentLang].longDistanceOptionsLabel}: ${longDistanceOptionText}\n`;
+            }
+            whatsappMessage += `\n`;
+
+            whatsappMessage += `*${translations[currentLang].orderSummaryTitle}:*\n`;
+            let orderDetails = [];
+
+            cart.forEach((item, index) => {
+                const product = productsData.find(p => p.id === item.id);
+                const displayProductName = product ? getProductNameForDisplay(product) : item.name;
+                const unit = item.size.endsWith('gm') ? translations[currentLang].gram : translations[currentLang].kilogram;
+
+                orderDetails.push(`${index + 1}. ${displayProductName} (${item.size.replace('gm', unit).replace('Kg', translations[currentLang].kilogram)}) - ${translations[currentLang].quantity}: ${item.quantity} x ${translations[currentLang].rupeeSymbol}${item.price} = ${translations[currentLang].rupeeSymbol}${item.price * item.quantity}`);
+            });
+
+            whatsappMessage += orderDetails.join('\n');
+            whatsappMessage += `\n\n*${translations[currentLang].subtotalAmountText}* ${translations[currentLang].rupeeSymbol}${orderSubtotal.toFixed(0)}`;
+            whatsappMessage += `\n*${translations[currentLang].deliveryChargeText}* ${translations[currentLang].rupeeSymbol}${currentDeliveryCharge.toFixed(0)}`;
+            whatsappMessage += `\n*${translations[currentLang].totalAmountText}* ${translations[currentLang].rupeeSymbol}${orderGrandTotal}`;
+            whatsappMessage += `\n\n${translations[currentLang].orderConfirmation.split('!')[1].trim()}!`;
+
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+
+            const whatsappNumber = "919326208190"; 
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            window.open(whatsappUrl, '_blank');
+
+            localStorage.removeItem('kalindiCart');
+            sessionStorage.removeItem('currentOrderCart');
+            sessionStorage.removeItem('currentOrderTotal');
+            
+            alert(translations[currentLang].orderConfirmation);
+            window.location.href = 'index.html'; 
+        }
+    </script>
+</body>
+</html>
