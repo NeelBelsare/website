@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Kalindi Anjali Gruh Udyog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: sans-serif; background-color: #faf6f0; color: #333; }
+        .container { max-width: 900px; margin: 2rem auto; padding: 1.5rem; background-color: white; border-radius: 0.75rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        input[type="text"], input[type="number"], input[type="file"], textarea {
+            width: 100%; padding: 0.75rem; border: 1px solid #dabb8b; border-radius: 0.5rem; margin-bottom: 1rem;
+            background-color: #fefefe;
+        }
+        input[type="text"]:focus, input[type="number"]:focus, input[type="file"]:focus, textarea:focus {
+            outline: none; border-color: #cb9759; box-shadow: 0 0 0 3px rgba(203, 151, 89, 0.3);
+        }
+        button {
+            padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+        button:active { transform: translateY(1px); }
+        .btn-primary { background-color: #cb9759; color: white; }
+        .btn-primary:hover { background-color: #a97f48; }
+        .btn-danger { background-color: #dc2626; color: white; }
+        .btn-danger:hover { background-color: #b91c1c; }
+        .btn-secondary { background-color: #e5e7eb; color: #4b5563; }
+        .btn-secondary:hover { background-color: #d1d5db; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+        th { background-color: #f4ecdd; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: #684530; }
+        tr:hover { background-color: #f9fafb; }
+        .message { padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; }
+        .message.success { background-color: #d1fae5; color: #065f46; border: 1px solid #34d399; }
+        .message.error { background-color: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
+    </style>
+</head>
+<body class="p-4">
+    <div class="container">
+        <h1 class="text-3xl font-bold text-heritage-800 text-center mb-6">Admin Panel</h1>
+
+        <div id="message" class="message hidden"></div>
+
+        <h2 class="text-2xl font-semibold text-heritage-700 mb-4">Product Details</h2>
+        <form id="productForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input type="hidden" id="productId">
+
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Product Name (English)</label>
+                <input type="text" id="name" placeholder="e.g., Peanut Chutney" required>
+            </div>
+            <div>
+                <label for="marathi" class="block text-sm font-medium text-gray-700 mb-1">Product Name (Marathi)</label>
+                <input type="text" id="marathi" placeholder="e.g., शेंगदाणा चटणी">
+            </div>
+            <div>
+                <label for="hindi" class="block text-sm font-medium text-gray-700 mb-1">Product Name (Hindi)</label>
+                <input type="text" id="hindi" placeholder="e.g., मूंगफली की चटनी">
+            </div>
+            <div>
+                <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <input type="text" id="category" placeholder="e.g., Chutney, Laddu" required>
+            </div>
+
+            <div class="md:col-span-2 mt-4">
+                <h3 class="text-lg font-semibold text-heritage-700 mb-2">Prices (in ₹)</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    <div>
+                        <label for="price50gm" class="block text-sm font-medium text-gray-700 mb-1">50 gm</label>
+                        <input type="number" id="price50gm" placeholder="e.g., 71" min="0">
+                    </div>
+                    <div>
+                        <label for="price100gm" class="block text-sm font-medium text-gray-700 mb-1">100 gm</label>
+                        <input type="number" id="price100gm" placeholder="e.g., 130" min="0">
+                    </div>
+                    <div>
+                        <label for="price250gm" class="block text-sm font-medium text-gray-700 mb-1">250 gm</label>
+                        <input type="number" id="price250gm" placeholder="e.g., 300" min="0">
+                    </div>
+                    <div>
+                        <label for="price500gm" class="block text-sm font-medium text-gray-700 mb-1">500 gm</label>
+                        <input type="number" id="price500gm" placeholder="e.g., 580" min="0">
+                    </div>
+                    <div>
+                        <label for="price1Kg" class="block text-sm font-medium text-gray-700 mb-1">1 Kg</label>
+                        <input type="number" id="price1Kg" placeholder="e.g., 1100" min="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 mt-4">
+                <label for="productImage" class="block text-sm font-medium text-gray-700 mb-1">Product Image (Replaces existing image)</label>
+                <input type="file" id="productImage" accept="image/png, image/jpeg, image/gif">
+                <p class="text-xs text-gray-500 mt-1">Uploads will be renamed to `prod[Product ID].[extension]`.</p>
+            </div>
+
+            <div class="md:col-span-2 flex justify-end space-x-3 mt-6">
+                <button type="button" id="clearFormButton" class="btn-secondary">Clear Form</button>
+                <button type="submit" class="btn-primary">Save Product</button>
+            </div>
+        </form>
+
+        <h2 class="text-2xl font-semibold text-heritage-700 mt-8 mb-4">Delivery Costs</h2>
+        <form id="deliverySettingsForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="shortDistanceCharge" class="block text-sm font-medium text-gray-700 mb-1">Within 2 KM (₹)</label>
+                <input type="number" id="shortDistanceCharge" placeholder="e.g., 20" min="0" required>
+            </div>
+            <div>
+                <label for="longDistanceFlatCharge" class="block text-sm font-medium text-gray-700 mb-1">More than 2 KM - Flat Charge (₹)</label>
+                <input type="number" id="longDistanceFlatCharge" placeholder="e.g., 100" min="0" required>
+            </div>
+            <div>
+                <label for="longDistanceMinKgCharge" class="block text-sm font-medium text-gray-700 mb-1">More than 2 KM - Min 1 KG Order Charge (₹)</label>
+                <input type="number" id="longDistanceMinKgCharge" placeholder="e.g., 20" min="0" required>
+            </div>
+            <div>
+                <label for="minOrderKg" class="block text-sm font-medium text-gray-700 mb-1">Minimum Order for Reduced Long-Distance (KG)</label>
+                <input type="number" id="minOrderKg" placeholder="e.g., 1" min="0" step="0.1" required>
+            </div>
+            <div class="md:col-span-2 flex justify-end space-x-3 mt-6">
+                <button type="submit" class="btn-primary">Save Delivery Settings</button>
+            </div>
+        </form>
+
+
+        <h2 class="text-2xl font-semibold text-heritage-700 mt-8 mb-4">Current Products</h2>
+        <div class="overflow-x-auto rounded-lg shadow-sm border border-heritage-100">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead>
+                    <tr>
+                        <th class="px-3 py-2">ID</th>
+                        <th class="px-3 py-2">Name</th>
+                        <th class="px-3 py-2">Category</th>
+                        <th class="px-3 py-2 text-center">50gm</th>
+                        <th class="px-3 py-2 text-center">100gm</th>
+                        <th class="px-3 py-2 text-center">250gm</th>
+                        <th class="px-3 py-2 text-center">500gm</th>
+                        <th class="px-3 py-2 text-center">1Kg</th>
+                        <th class="px-3 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="productListBody" class="divide-y divide-gray-100">
+                    <tr><td colspan="9" class="text-center py-4 text-gray-500">Loading products...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = ''; // Changed to empty string for relative API path for GitHub deployment
+
+        const productForm = document.getElementById('productForm');
+        const productIdInput = document.getElementById('productId');
+        const nameInput = document.getElementById('name');
+        const marathiInput = document.getElementById('marathi');
+        const hindiInput = document.getElementById('hindi');
+        const categoryInput = document.getElementById('category');
+        const price50gmInput = document.getElementById('price50gm');
+        const price100gmInput = document.getElementById('price100gm');
+        const price250gmInput = document.getElementById('price250gm');
+        const price500gmInput = document.getElementById('price500gm');
+        const price1KgInput = document.getElementById('price1Kg');
+        const productImageInput = document.getElementById('productImage');
+        const productListBody = document.getElementById('productListBody');
+        const messageDiv = document.getElementById('message');
+        const clearFormButton = document.getElementById('clearFormButton');
+
+        const deliverySettingsForm = document.getElementById('deliverySettingsForm');
+        const shortDistanceChargeInput = document.getElementById('shortDistanceCharge');
+        const longDistanceFlatChargeInput = document.getElementById('longDistanceFlatCharge');
+        const longDistanceMinKgChargeInput = document.getElementById('longDistanceMinKgCharge');
+        const minOrderKgInput = document.getElementById('minOrderKg');
+
+
+        let currentEditingProduct = null;
+
+        function showMessage(msg, type = 'success') {
+            messageDiv.textContent = msg;
+            messageDiv.className = `message ${type}`;
+            messageDiv.classList.remove('hidden');
+            setTimeout(() => {
+                messageDiv.classList.add('hidden');
+            }, 5000);
+        }
+
+        function clearForm() {
+            productIdInput.value = '';
+            nameInput.value = '';
+            marathiInput.value = '';
+            hindiInput.value = '';
+            categoryInput.value = '';
+            price50gmInput.value = '';
+            price100gmInput.value = '';
+            price250gmInput.value = '';
+            price500gmInput.value = '';
+            price1KgInput.value = '';
+            productImageInput.value = '';
+            currentEditingProduct = null;
+            document.querySelector('#productForm button[type="submit"]').textContent = 'Save Product';
+        }
+
+        async function fetchProducts() {
+            productListBody.innerHTML = `<tr><td colspan="9" class="text-center py-4 text-gray-500">Loading products...</td></tr>`;
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/products`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const products = await response.json();
+                renderProductList(products);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                showMessage('Failed to load products. ' + error.message, 'error');
+                productListBody.innerHTML = `<tr><td colspan="9" class="text-center py-4 text-red-600">Error loading products.</td></tr>`;
+            }
+        }
+
+        function renderProductList(products) {
+            productListBody.innerHTML = '';
+            if (products.length === 0) {
+                productListBody.innerHTML = `<tr><td colspan="9" class="text-center py-4 text-gray-500">No products found.</td></tr>`;
+                return;
+            }
+
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-3 py-2 text-sm text-gray-900">${product.id}</td>
+                    <td class="px-3 py-2 text-sm text-gray-800 font-semibold">${product.name}</td>
+                    <td class="px-3 py-2 text-sm text-gray-700">${product.category || '-'}</td>
+                    <td class="px-3 py-2 text-sm text-center">${product.prices?.["50gm"] !== undefined ? `₹${product.prices["50gm"]}` : '-'}</td>
+                    <td class="px-3 py-2 text-sm text-center">${product.prices?.["100gm"] !== undefined ? `₹${product.prices["100gm"]}` : '-'}</td>
+                    <td class="px-3 py-2 text-sm text-center">${product.prices?.["250gm"] !== undefined ? `₹${product.prices["250gm"]}` : '-'}</td>
+                    <td class="px-3 py-2 text-sm text-center">${product.prices?.["500gm"] !== undefined ? `₹${product.prices["500gm"]}` : '-'}</td>
+                    <td class="px-3 py-2 text-sm text-center">${product.prices?.["1Kg"] !== undefined ? `₹${product.prices["1Kg"]}` : '-'}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-sm font-medium">
+                        <button class="text-indigo-600 hover:text-indigo-900 mr-2" onclick="editProduct('${product.id}')">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="text-red-600 hover:text-red-900" onclick="deleteProduct('${product.id}')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </td>
+                `;
+                productListBody.appendChild(row);
+            });
+        }
+
+        async function editProduct(id) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/products`);
+                if (!response.ok) throw new Error('Could not fetch products for editing.');
+                const products = await response.json();
+                const productToEdit = products.find(p => p.id === id);
+
+                if (productToEdit) {
+                    productIdInput.value = productToEdit.id;
+                    nameInput.value = productToEdit.name || '';
+                    marathiInput.value = productToEdit.marathi || '';
+                    hindiInput.value = productToEdit.hindi || '';
+                    categoryInput.value = productToEdit.category || '';
+                    price50gmInput.value = productToEdit.prices?.["50gm"] || '';
+                    price100gmInput.value = productToEdit.prices?.["100gm"] || '';
+                    price250gmInput.value = productToEdit.prices?.["250gm"] || '';
+                    price500gmInput.value = productToEdit.prices?.["500gm"] || '';
+                    price1KgInput.value = productToEdit.prices?.["1Kg"] || '';
+                    productImageInput.value = '';
+
+                    currentEditingProduct = id;
+                    document.querySelector('#productForm button[type="submit"]').textContent = 'Update Product';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    showMessage('Product not found for editing.', 'error');
+                }
+            } catch (error) {
+                console.error('Error preparing product for edit:', error);
+                showMessage('Error loading product for edit. ' + error.message, 'error');
+            }
+        }
+
+        async function deleteProduct(id) {
+            if (!confirm(`Are you sure you want to delete product ID ${id}? This action cannot be undone.`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/products/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    showMessage(data.message, 'success');
+                    fetchProducts();
+                    if (currentEditingProduct === id) {
+                        clearForm();
+                    }
+                } else {
+                    throw new Error(data.error || 'Failed to delete product.');
+                }
+            } catch (error) {
+                console.error('Error deleting product:', error);
+                showMessage('Error deleting product: ' + error.message, 'error');
+            }
+        }
+
+        productForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const productId = productIdInput.value;
+            const prices = {
+                "50gm": price50gmInput.value ? parseFloat(price50gmInput.value) : undefined,
+                "100gm": price100gmInput.value ? parseFloat(price100gmInput.value) : undefined,
+                "250gm": price250gmInput.value ? parseFloat(price250gmInput.value) : undefined,
+                "500gm": price500gmInput.value ? parseFloat(price500gmInput.value) : undefined,
+                "1Kg": price1KgInput.value ? parseFloat(price1KgInput.value) : undefined,
+            };
+
+            Object.keys(prices).forEach(key => prices[key] === undefined && delete prices[key]);
+
+
+            const productData = {
+                name: nameInput.value.trim(),
+                marathi: marathiInput.value.trim(),
+                hindi: hindiInput.value.trim(),
+                category: categoryInput.value.trim(),
+                prices: prices
+            };
+
+            if (productData.marathi === '') delete productData.marathi;
+            if (productData.hindi === '') delete productData.hindi;
+            if (productData.category === '') delete productData.category;
+
+
+            let url = `${API_BASE_URL}/api/products`;
+            let method = 'POST';
+
+            if (productId) {
+                url = `${API_BASE_URL}/api/products/${productId}`;
+                method = 'PUT';
+            }
+
+            try {
+                const imageFile = productImageInput.files[0];
+                if (imageFile) {
+                    if (!productId) {
+                        showMessage('Please save the product first to get an ID before uploading an image.', 'error');
+                        return;
+                    }
+                    const formData = new FormData();
+                    formData.append('file', imageFile);
+                    const uploadResponse = await fetch(`${API_BASE_URL}/api/upload_product_image/${productId}`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const uploadData = await uploadResponse.json();
+                    if (!uploadResponse.ok) {
+                        throw new Error(uploadData.error || 'Failed to upload image.');
+                    }
+                    showMessage(uploadData.message, 'success');
+                }
+
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(productData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showMessage(data.message, 'success');
+                    clearForm();
+                    fetchProducts();
+                } else {
+                    throw new Error(data.error || 'An unknown error occurred.');
+                }
+            } catch (error) {
+                console.error('Error saving product:', error);
+                showMessage('Error saving product: ' + error.message, 'error');
+            }
+        });
+
+        clearFormButton.addEventListener('click', clearForm);
+
+        async function fetchDeliverySettings() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/delivery_settings`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const settings = await response.json();
+                shortDistanceChargeInput.value = settings.DELIVERY_CHARGES?.short || '';
+                longDistanceFlatChargeInput.value = settings.DELIVERY_CHARGES?.long_flat100 || '';
+                longDistanceMinKgChargeInput.value = settings.DELIVERY_CHARGES?.long_min1kg || '';
+                minOrderKgInput.value = settings.MIN_ORDER_KG_FOR_LONG_DISTANCE || '';
+            } catch (error) {
+                console.error('Error fetching delivery settings:', error);
+                showMessage('Failed to load delivery settings. ' + error.message, 'error');
+            }
+        }
+
+        deliverySettingsForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const settingsData = {
+                DELIVERY_CHARGES: {
+                    short: parseFloat(shortDistanceChargeInput.value),
+                    long_flat100: parseFloat(longDistanceFlatChargeInput.value),
+                    long_min1kg: parseFloat(longDistanceMinKgChargeInput.value)
+                },
+                MIN_ORDER_KG_FOR_LONG_DISTANCE: parseFloat(minOrderKgInput.value)
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/delivery_settings`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(settingsData)
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    showMessage(data.message, 'success');
+                } else {
+                    throw new Error(data.error || 'Failed to update delivery settings.');
+                }
+            } catch (error) {
+                console.error('Error saving delivery settings:', error);
+                showMessage('Error saving delivery settings: ' + error.message, 'error');
+            }
+        });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchProducts();
+            fetchDeliverySettings();
+        });
+    </script>
+</body>
+</html>
